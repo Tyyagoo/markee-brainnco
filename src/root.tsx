@@ -2,6 +2,8 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { App } from 'app'
 import { theme } from 'resources/theme'
 
+import 'normalize.css'
+
 const GlobalStyle = createGlobalStyle`
     * {
         box-sizing: border-box;
