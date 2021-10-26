@@ -1,46 +1,24 @@
 import * as S from './styles'
 import * as I from 'ui/icons'
+import { v4 as uuid } from 'uuid'
+import { useState } from 'react'
 import { File } from './types'
 import { FileItem } from './file'
 
 function Sidebar () {
-  const files: File[] = [
-    {
-      id: 'readme',
-      name: 'README.md',
-      content: '',
-      active: false,
-      status: 'saving',
-    },
-    {
-      id: 'contributing',
-      name: 'CONTRIBUTING.md',
-      content: '',
-      active: false,
-      status: 'saved',
-    },
-    {
-      id: 'license',
-      name: 'LICENSE.md',
-      content: '',
-      active: false,
-      status: 'editing',
-    },
-    {
-      id: 'links',
-      name: 'Links.md',
-      content: '',
-      active: false,
-      status: 'editing',
-    },
-    {
-      id: 'roadmap',
-      name: 'roadmap.md',
+  const [files, setFiles] = useState<File[]>([])
+
+  function handleFileCreate () {
+    const file: File = {
+      id: uuid(),
+      name: 'Sem título',
       content: '',
       active: true,
-      status: 'editing',
-    },
-  ]
+      status: 'saved',
+    }
+
+    setFiles(fs => [...fs.map(f => ({ ...f, active: false })), file])
+  }
 
   return (
     <S.Aside>
@@ -58,7 +36,7 @@ function Sidebar () {
         <S.Line />
       </S.Divider>
 
-      <S.PrimaryButton>
+      <S.PrimaryButton onClick={handleFileCreate}>
         <I.Plus width='9px' height='9px' />Adicionar arquivo
       </S.PrimaryButton>
 
