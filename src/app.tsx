@@ -57,9 +57,13 @@ function App () {
       : f))
   }
 
+  const handleFileDelete = (id: string) => {
+    setFiles(fs => fs.filter(f => f.id !== id))
+  }
+
   return (
     <Layout>
-      <Sidebar files={files} createFile={handleFileCreate} selectFile={handleFileChange} />
+      <Sidebar files={files} createFile={handleFileCreate} selectFile={handleFileChange} deleteFile={handleFileDelete} />
       <Content file={files.find(f => f.active)} onFileUpdate={handleFileUpdate} inputTitleRef={inputTitleRef} textAreaRef={textAreaRef} />
     </Layout>
   )

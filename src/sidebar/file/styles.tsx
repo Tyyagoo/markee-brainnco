@@ -24,6 +24,11 @@ export const IconContainer = styled.div`
   padding-right: 5px;
 `
 
+export const DeleteButton = styled.button`
+  background: none;
+  border: none;
+`
+
 export const rotation = keyframes`
   from {
     transform: rotate(0deg);

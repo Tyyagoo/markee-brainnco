@@ -7,9 +7,10 @@ type SidebarProps = {
   files: File[]
   createFile: () => void
   selectFile: (id: string) => void
+  deleteFile: (id: string) => void
 }
 
-export function Sidebar ({ files, createFile, selectFile }: SidebarProps) {
+export function Sidebar ({ files, createFile, selectFile, deleteFile }: SidebarProps) {
   return (
     <S.Aside>
       <S.Header>
@@ -33,7 +34,7 @@ export function Sidebar ({ files, createFile, selectFile }: SidebarProps) {
       <S.List>
         {files.map(file => (
           <FileItem
-            key={file.id} id={file.id} name={file.name} active={file.active} status={file.status} selectFile={selectFile}
+            key={file.id} id={file.id} name={file.name} active={file.active} status={file.status} selectFile={selectFile} deleteFile={deleteFile}
           />
         ),
         )}
