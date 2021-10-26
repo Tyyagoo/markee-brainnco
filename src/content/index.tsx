@@ -5,7 +5,7 @@ export function Content () {
   return (
     <S.Layout>
       <S.Header>
-        <I.FileIcon color='#1FC8E1' />
+        <I.File color='#1FC8E1' />
         <S.Input value='CONTRIBUT' autoFocus />
       </S.Header>
 

@@ -1,6 +1,7 @@
 import * as S from './styles'
 import * as I from 'ui/icons'
 import { File } from './types'
+import { FileItem } from './file'
 
 function Sidebar () {
   const files: File[] = [
@@ -41,27 +42,10 @@ function Sidebar () {
     },
   ]
 
-  function getStatusIcon (file: File) {
-    const { status: fileStatus } = file
-
-    if (file.active) {
-      return <I.SelectedIcon width='8px' height='9px' />
-    } else {
-      switch (fileStatus) {
-        case 'saving':
-          return <S.RotateAnimation><I.SavingIcon width='10px' height='10px' /></S.RotateAnimation>
-        case 'saved':
-          return <I.SavedIcon width='10px' height='10px' />
-        default:
-          return <I.CloseIcon width='10px' height='10px' />
-      }
-    }
-  }
-
   return (
     <S.Aside>
       <S.Header>
-        <S.Image src='logo192.png' alt='logo' />
+        <S.Image src='/logo192.png' alt='logo' />
         <div>
           <S.BoldWhiteSpan>markee</S.BoldWhiteSpan>
           <S.BoldPrimarySpan>.</S.BoldPrimarySpan>
@@ -75,21 +59,14 @@ function Sidebar () {
       </S.Divider>
 
       <S.PrimaryButton>
-        <I.PlusIcon width='9px' height='9px' />Adicionar arquivo
+        <I.Plus width='9px' height='9px' />Adicionar arquivo
       </S.PrimaryButton>
 
       <S.List>
-        {files.map(file => {
-          return (
-            <S.ListItem key={file.id} $active={file.active} onFocus={() => console.log(`focus on: ${file.id}`)}>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <I.FileIcon color={file.active ? '#1FC8E1' : '#FAFAFA'} />
-                <S.Anchor href='/'>{file.name}</S.Anchor>
-              </div>
-              <S.IconContainer>{getStatusIcon(file)}</S.IconContainer>
-            </S.ListItem>
-          )
-        })}
+        {files.map(file => (
+          <FileItem key={file.id} id={file.id} name={file.name} active={file.active} status={file.status} />
+        ),
+        )}
       </S.List>
     </S.Aside>
   )
