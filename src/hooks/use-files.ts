@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { File } from 'resources/types'
 import { v4 as uuid } from 'uuid'
-import localforage from 'localforage'
+import lf from 'localforage'
 
 export function useFiles () {
   const [files, setFiles] = useState<File[]>([])
@@ -12,7 +12,7 @@ export function useFiles () {
 
   useEffect(() => {
     async function loadFiles () {
-      const files = await localforage.getItem<File[]>('files')
+      const files = await lf.getItem<File[]>('files')
       if (files && Array.isArray(files) && files.length !== 0) {
         setFiles(files)
       } else {
@@ -22,6 +22,10 @@ export function useFiles () {
 
     loadFiles()
   }, [])
+
+  useEffect(() => {
+    lf.setItem('files', files)
+  }, [files])
 
   useEffect(() => {
     function onUpdate () {
@@ -42,12 +46,7 @@ export function useFiles () {
       }
     }
 
-    async function saveFiles () {
-      await localforage.setItem('files', files)
-    }
-
     onUpdate()
-    saveFiles()
   }, [files])
 
   const handleFileCreate = () => {
