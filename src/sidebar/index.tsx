@@ -1,4 +1,5 @@
 import * as S from './styles'
+import * as I from 'ui/icons'
 import { File } from './types'
 
 function Sidebar () {
@@ -8,14 +9,14 @@ function Sidebar () {
       name: 'README.md',
       content: '',
       active: false,
-      status: 'editing',
+      status: 'saving',
     },
     {
       id: 'contributing',
       name: 'CONTRIBUTING.md',
       content: '',
       active: false,
-      status: 'editing',
+      status: 'saved',
     },
     {
       id: 'license',
@@ -39,6 +40,23 @@ function Sidebar () {
       status: 'editing',
     },
   ]
+
+  function getStatusIcon (file: File) {
+    const { status: fileStatus } = file
+
+    if (file.active) {
+      return <I.SelectedIcon width='8px' height='9px' />
+    } else {
+      switch (fileStatus) {
+        case 'saving':
+          return <S.RotateAnimation><I.SavingIcon width='10px' height='10px' /></S.RotateAnimation>
+        case 'saved':
+          return <I.SavedIcon width='10px' height='10px' />
+        default:
+          return <></>
+      }
+    }
+  }
 
   return (
     <S.Aside>
@@ -65,10 +83,10 @@ function Sidebar () {
           return (
             <S.ListItem key={file.id}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <S.FileIcon src='file.svg' alt='file icon' />
+                <I.FileIcon color={file.active ? '#1FC8E1' : '#FAFAFA'} />
                 <S.Anchor href='/'>{file.name}</S.Anchor>
               </div>
-              <S.CloseButton>x</S.CloseButton>
+              {getStatusIcon(file)}
             </S.ListItem>
           )
         })}

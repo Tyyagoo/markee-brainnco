@@ -82,12 +82,7 @@ export const ListItem = styled.li`
   height: 3rem;
   display: flex;
   justify-content: space-between;
-  text-align: center;
-`
-
-export const FileIcon = styled.img`
-  width: 16px;
-  color: green;
+  align-items: center;
 `
 
 export const Anchor = styled.a`${({ theme }) => css`
@@ -96,10 +91,14 @@ export const Anchor = styled.a`${({ theme }) => css`
     padding-left: 10px;
 `}`
 
-export const CloseButton = styled(DefaultButton)`${({ theme }) => css`
-    background: none;
-    border: none;
-    text-decoration: none;
-    color: ${theme.colors.white};
-    font-weight: 700;
-`}`
+export const RotateAnimation = styled.div`
+  animation: rotation 1s infinite linear;
+  @keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+  }
+`
