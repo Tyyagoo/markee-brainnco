@@ -1,6 +1,6 @@
 import * as S from './styles'
 import * as I from 'ui/icons'
-import { File } from '../sidebar/types'
+import { File } from 'resources/types'
 import marked from 'marked'
 import DOMpurify from 'dompurify'
 import { ChangeEvent, useState, RefObject, useEffect } from 'react'

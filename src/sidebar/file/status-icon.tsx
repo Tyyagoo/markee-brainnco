@@ -1,6 +1,6 @@
 import * as S from './styles'
 import * as I from 'ui/icons'
-import { FileStatus } from '../types'
+import { FileStatus } from 'resources/types'
 
 export type StatusIconProps = {
   status: FileStatus
