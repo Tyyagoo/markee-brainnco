@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
 import { Sidebar } from 'sidebar'
+import { Content } from 'content'
 
 const Layout = styled.div`
   height: 100%;
@@ -9,7 +10,7 @@ const Layout = styled.div`
 `
 
 function App () {
-  return <Layout><Sidebar /></Layout>
+  return <Layout><Sidebar /><Content /></Layout>
 }
 
 export { App }
