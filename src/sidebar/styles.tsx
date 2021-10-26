@@ -67,6 +67,10 @@ export const PrimaryButton = styled(DefaultButton)`${({ theme }) => css`
     margin: 20px 0px;
     background-color: ${theme.colors.primary};
     color: ${theme.colors.lightBlack};
+
+    &: hover {
+      
+    }
 `}`
 
 export const List = styled.ul`
@@ -78,18 +82,29 @@ export const List = styled.ul`
     padding-inline-start: 0px;
 `
 
-export const ListItem = styled.li`
+export const ListItem = styled.li<{$active: boolean}>`${({ theme, $active }) => css`
   height: 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
+  border-radius: 3px;
+
+  background-color: ${$active ? theme.colors.black : 'transparent'};
+
+  &:hover {
+    background-color: ${theme.colors.black};
+  }
+`}`
 
 export const Anchor = styled.a`${({ theme }) => css`
     text-decoration: none;
     color: ${theme.colors.white};
     padding-left: 10px;
 `}`
+
+export const IconContainer = styled.div`
+  padding-right: 5px;
+`
 
 export const RotateAnimation = styled.div`
   animation: rotation 1s infinite linear;

@@ -53,7 +53,7 @@ function Sidebar () {
         case 'saved':
           return <I.SavedIcon width='10px' height='10px' />
         default:
-          return <></>
+          return <I.CloseIcon width='10px' height='10px' />
       }
     }
   }
@@ -75,18 +75,18 @@ function Sidebar () {
       </S.Divider>
 
       <S.PrimaryButton>
-        <S.Span>+</S.Span> Adicionar arquivo
+        <I.PlusIcon width='9px' height='9px' />Adicionar arquivo
       </S.PrimaryButton>
 
       <S.List>
         {files.map(file => {
           return (
-            <S.ListItem key={file.id}>
+            <S.ListItem key={file.id} $active={file.active} onFocus={() => console.log(`focus on: ${file.id}`)}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <I.FileIcon color={file.active ? '#1FC8E1' : '#FAFAFA'} />
                 <S.Anchor href='/'>{file.name}</S.Anchor>
               </div>
-              {getStatusIcon(file)}
+              <S.IconContainer>{getStatusIcon(file)}</S.IconContainer>
             </S.ListItem>
           )
         })}
