@@ -3,14 +3,19 @@ import * as I from 'ui/icons'
 import { File } from '../types'
 
 type FileProps = {
-
+  selectFile: (id: string) => void
 } & Omit<File, 'content'>;
 
 export function FileItem ({
-  id, name, active, status,
+  id, name, active, status, selectFile,
 }: FileProps) {
   return (
-    <S.ListItem key={id} $active={active}>
+    <S.ListItem
+      key={id} $active={active} onClick={(ev) => {
+        ev.preventDefault()
+        selectFile(id)
+      }}
+    >
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <I.File color={active ? '#1FC8E1' : '#FAFAFA'} />
         <S.Anchor href={`/file/${id}`}>{name}</S.Anchor>
