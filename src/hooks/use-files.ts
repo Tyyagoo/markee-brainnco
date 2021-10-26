@@ -28,6 +28,13 @@ export function useFiles () {
   }, [files])
 
   useEffect(() => {
+    const file = files.find(f => f.active)
+    if (file) {
+      window.history.pushState(null, '', `/file/${file.id}`)
+    }
+  }, [files])
+
+  useEffect(() => {
     function onUpdate () {
       const selected = files.find(f => f.active)
       if (selected && selected.status === 'editing') {
