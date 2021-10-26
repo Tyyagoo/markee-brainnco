@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Sidebar } from 'sidebar'
 import { File } from 'sidebar/types'
 import { Content } from 'content'
@@ -17,6 +17,21 @@ function App () {
 
   const inputTitleRef = useRef<HTMLInputElement>(null)
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    function onUpdate () {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+
+      timeoutRef.current = setTimeout(() => {
+        setFiles(fs => fs.map(f => f.active ? { ...f, status: 'saving' } : { ...f, status: 'saved' }))
+      }, 300)
+    }
+
+    onUpdate()
+  }, [files])
 
   const handleFileCreate = () => {
     const file: File = {
@@ -38,7 +53,7 @@ function App () {
 
   const handleFileUpdate = () => {
     setFiles(fs => fs.map(f => f.active
-      ? { ...f, name: inputTitleRef.current?.value ?? f.name, content: textAreaRef.current?.value ?? f.content }
+      ? { ...f, name: inputTitleRef.current?.value ?? f.name, content: textAreaRef.current?.value ?? f.content, status: 'editing' }
       : f))
   }
 

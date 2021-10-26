@@ -57,7 +57,7 @@ export function Content ({ file, onFileUpdate, inputTitleRef, textAreaRef }: Con
         <S.Input value={title} onChange={handleTitleChange} ref={inputTitleRef} disabled={!file} />
       </S.Header>
 
-      <S.TextArea placeholder='Type your markdown here!' value={content} onChange={handleContentChange} ref={textAreaRef} disabled={!file} />
+      <S.TextArea placeholder={!file ? 'Crie um arquivo antes de começar a editar..' : 'Edite seu markdown aqui!'} value={content} onChange={handleContentChange} ref={textAreaRef} disabled={!file} />
       <S.OutputContainer dangerouslySetInnerHTML={{ __html: DOMpurify.sanitize(marked(content)) }} />
     </S.Layout>
   )
