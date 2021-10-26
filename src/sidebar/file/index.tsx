@@ -2,6 +2,8 @@ import * as S from './styles'
 import * as I from 'ui/icons'
 import { File } from '../types'
 
+import { StatusIcon } from './status-icon'
+
 type FileProps = {
   selectFile: (id: string) => void
   deleteFile: (id: string) => void
@@ -23,10 +25,8 @@ export function FileItem ({
         </S.Anchor>
       </div>
       <S.IconContainer>
-        {active && <I.Ellipse width='8px' height='9px' />}
-        {(!active && status === 'saving') && <S.RotateAnimation><I.Loading width='10px' height='10px' /></S.RotateAnimation>}
-        {(!active && status === 'saved') && <I.Check width='10px' height='10px' />}
-        {(!active && status === 'editing') && <I.Close width='10px' height='10px' />}
+        {active && <StatusIcon status={status} />}
+
         {!active && (
           <S.DeleteButton onClick={(ev) => {
             ev.preventDefault()
