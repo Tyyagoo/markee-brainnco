@@ -29,7 +29,6 @@ export function FileItem ({
         {!active && (
           <S.DeleteButton onClick={(ev) => {
             ev.preventDefault()
-            console.log('deleting')
             deleteFile(id)
           }}
           >
