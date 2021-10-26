@@ -54,7 +54,7 @@ export function Content ({ file, onFileUpdate, inputTitleRef, textAreaRef }: Con
     <S.Layout>
       <S.Header>
         <I.File color='#1FC8E1' />
-        <S.Input value={title} onChange={handleTitleChange} ref={inputTitleRef} disabled={!file} />
+        <S.Input value={title} onChange={handleTitleChange} ref={inputTitleRef} disabled={!file} autoFocus />
       </S.Header>
 
       <S.TextArea placeholder={!file ? 'Crie um arquivo antes de começar a editar..' : 'Edite seu markdown aqui!'} value={content} onChange={handleContentChange} ref={textAreaRef} disabled={!file} />

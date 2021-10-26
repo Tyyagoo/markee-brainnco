@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { File } from 'resources/types'
 import { v4 as uuid } from 'uuid'
+import localforage from 'localforage'
 
 export function useFiles () {
   const [files, setFiles] = useState<File[]>([])
@@ -8,6 +9,19 @@ export function useFiles () {
   const inputTitleRef = useRef<HTMLInputElement>(null)
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    async function loadFiles () {
+      const files = await localforage.getItem<File[]>('files')
+      if (files && Array.isArray(files) && files.length !== 0) {
+        setFiles(files)
+      } else {
+        handleFileCreate()
+      }
+    }
+
+    loadFiles()
+  }, [])
 
   useEffect(() => {
     function onUpdate () {
@@ -28,7 +42,12 @@ export function useFiles () {
       }
     }
 
+    async function saveFiles () {
+      await localforage.setItem('files', files)
+    }
+
     onUpdate()
+    saveFiles()
   }, [files])
 
   const handleFileCreate = () => {
