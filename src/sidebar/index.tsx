@@ -8,7 +8,7 @@ import { FileItem } from './file'
 function Sidebar () {
   const [files, setFiles] = useState<File[]>([])
 
-  function handleFileCreate () {
+  const handleFileCreate = () => {
     const file: File = {
       id: uuid(),
       name: 'Sem título',

@@ -67,9 +67,14 @@ export const PrimaryButton = styled(DefaultButton)`${({ theme }) => css`
     margin: 20px 0px;
     background-color: ${theme.colors.primary};
     color: ${theme.colors.lightBlack};
-
+    transition: 0.2s ease all;
     &: hover {
-      
+      opacity: 0.7;
+    }
+
+    &:active {
+      transform: scale(0.85);
+      box-shadow: 3px 2px 25px 1px rgba(0,0,0,0.25);
     }
 `}`
 
